@@ -204,7 +204,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 7/6/2012
+-- Create date: 7/2/2013
 -- Description:	Calculate the average loss %
 -- for a particular bean, for the last 6 roasts
 -- =============================================
@@ -298,7 +298,7 @@ GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 7/9/2012
+-- Create date: 1/9/2013
 -- Description:	Round upwards to half.
 --		If the number is negative, return 0
 --		Otherwise round the number upwards to the nearest 0.5
@@ -328,3 +328,142 @@ BEGIN
 
 END
 GO
+
+-- =============================================
+-- Author:		Meryl
+-- Create date: 18/4/2013
+-- Description:	Calculate the average price per kilogram
+--		for one green bean. Parameters CurrentDate and CurrentQty
+--		refer to a point in time, possibly today but not necessarily.
+--	This procedure assumes that CurrentQty is correct for the
+--		given CurrentDate, if not the results will be inaccurate.
+-- However if the CurrentQty parameter is not supplied,
+--		the function will calculate it.
+-- =============================================
+CREATE FUNCTION [dbo].[fnCalcFIFOPricePerKg] 
+(
+	@StockID INT,
+	@CurrentDate DATE,
+	@CurrentQty DECIMAL(9, 3) = NULL
+)
+RETURNS MONEY
+
+AS
+BEGIN
+	DECLARE @FIFOPricePerKg MONEY
+	
+	DECLARE @PurchaseDate DATE
+	DECLARE @QtyPurchased DECIMAL(9, 3)
+	DECLARE @PricePerKg MONEY
+	DECLARE @TotValue MONEY
+	DECLARE @TotQty DECIMAL(9, 3)
+	
+	SELECT @TotValue = 0, @TotQty = 0
+	
+	IF @CurrentQty IS NULL
+		SELECT @CurrentQty = dbo.fnCalcStockBal(@StockID, @CurrentDate)
+
+    DECLARE PurchaseCursor CURSOR FOR
+		SELECT PurchaseDate, QtyPurchased, PricePerKg
+			FROM TStockPurchase
+			WHERE StockID = @StockID
+				AND PurchaseDate <= @CurrentDate
+			ORDER BY PurchaseDate DESC
+    OPEN PurchaseCursor
+    
+    FETCH NEXT FROM PurchaseCursor
+		INTO @PurchaseDate, @QtyPurchased, @PricePerKg
+	WHILE @@FETCH_STATUS = 0 AND @TotQty < @CurrentQty
+	BEGIN
+      			
+		IF @TotQty + @QtyPurchased <= @CurrentQty
+		BEGIN
+			SELECT @TotValue = @TotValue + (@QtyPurchased * @PricePerKg)
+			SELECT @TotQty = @TotQty + @QtyPurchased
+		END
+		ELSE
+		BEGIN
+			SELECT @TotValue = @TotValue + (@CurrentQty - @TotQty) * @PricePerKg
+			SELECT @TotQty = @CurrentQty
+		END
+		
+		FETCH NEXT FROM PurchaseCursor
+			INTO @PurchaseDate, @QtyPurchased, @PricePerKg
+	END
+			
+	IF @TotQty = 0
+		SELECT @FIFOPricePerKg = NULL
+	ELSE
+		SELECT @FIFOPricePerKg = @TotValue / @TotQty
+        
+    CLOSE PurchaseCursor
+    DEALLOCATE PurchaseCursor
+		
+	RETURN @FIFOPricePerKg
+END
+
+-- =============================================
+-- Author:		Meryl
+-- Create date: 22/4/2013
+-- Description:	Calculate the blend price per kg =
+--		weighted average of all components' price per kg
+-- =============================================
+CREATE FUNCTION [dbo].[fnCalcBlendPricePerKg]
+(
+	@BlendStockID INT
+)
+RETURNS money
+AS
+BEGIN
+	DECLARE @Price MONEY
+
+	-- If any component of the blend has a null price, then the blend's price cannot
+	--		be determined, so make it null
+	IF (SELECT COUNT(*) from TBlendComponent, TStockRoast, TStockGreen
+		WHERE TBlendComponent.BlendStockID = @BlendStockID
+		AND TBlendComponent.ComponentStockID = TStockRoast.StockID
+		AND TStockRoast.GreenStockID = TStockGreen.StockID
+		AND TStockGreen.PricePerKg IS NULL)
+		> 0
+		
+			SELECT @Price = NULL
+	
+	ELSE
+	  
+		-- Calculate the weighted average of all components' price per kg
+		SELECT @Price = SUM(TStockGreen.PricePerKg * Percentage / 100)
+		FROM TBlendComponent, TStockRoast, TStockGreen
+		WHERE TBlendComponent.BlendStockID = @BlendStockID
+			AND TBlendComponent.ComponentStockID = TStockRoast.StockID
+			AND TStockRoast.GreenStockID = TStockGreen.StockID
+	
+	RETURN @Price
+
+END
+
+-- =============================================
+-- Author:		Meryl
+-- Create date: 26/5/2013
+-- Description:	Calculate the balance of stock on hand
+-- on a particular date
+-- =============================================
+CREATE FUNCTION [dbo].[fnCalcStockBal] 
+(
+	-- Add the parameters for the function here
+	@StockID INT,
+	@Date DATE
+)
+RETURNS udtStockQty
+AS
+BEGIN
+	DECLARE @Balance DECIMAL(9, 3)
+
+	SELECT @Balance = 
+		(SELECT ISNULL(SUM(QtyPurchased), 0) FROM TStockPurchase
+			WHERE StockID = @StockID AND PurchaseDate <= @Date)
+		- (SELECT ISNULL(SUM(GreenQty), 0) FROM TRoastBatch
+			WHERE StockID = @StockID AND RoastDate <= @Date)
+
+	RETURN @Balance
+
+END

@@ -344,3 +344,26 @@ INSERT [dbo].[TRoastBatch] ([BatchID], [MachineID], [RoastDate], [BatchNumber], 
 INSERT [dbo].[TRoastBatch] ([BatchID], [MachineID], [RoastDate], [BatchNumber], [StockID], [GreenQty], [YieldQty], [LossPercentage], [Humidity], [AmbientTemp], [ChargeTemp], [TurningPointTime], [TurningPointTemp], [TimeAt250], [TimeAt300], [TimeChangeTo5050], [TempChangeTo5050], [TimeAt350], [TimeChangeToFull], [TempChangeToFull], [FirstCrackTime], [FirstCrackTemp], [SecondCrackTime], [SecondCrackTemp], [DropTime], [DropTemp], [YellowToBrownTime], [YellowToBrownTemp], [Notes], [TimeAt190], [TimeAt220], [NewGasCylinder], [CaptureUser], [CaptureDate]) VALUES (9, 1, '2014-09-30', N'B12-1409005', 5, CAST(12.000 AS Decimal(9, 3)), CAST(10.88 AS Decimal(9, 3)), CAST(15.83 AS Decimal(8, 2)), CAST(60.00 AS Decimal(6, 2)), CAST(18.00 AS Decimal(6, 2)), CAST(400.00 AS Decimal(6, 2)), CAST(0x00F8160000000000 AS Time), CAST(156.40 AS Decimal(6, 2)), CAST(0x0020490000000000 AS Time), CAST(0x00D8720000000000 AS Time), CAST(0x0040560000000000 AS Time), CAST(270.00 AS Decimal(6, 2)), CAST(0x00E8AD0000000000 AS Time), CAST(0x005CA30000000000 AS Time), CAST(340.00 AS Decimal(6, 2)), CAST(0x007CCE0000000000 AS Time), CAST(392.70 AS Decimal(6, 2)), CAST(0x00C0E40000000000 AS Time), CAST(428.00 AS Decimal(6, 2)), CAST(0x00C0E40000000000 AS Time), CAST(428.00 AS Decimal(6, 2)), NULL, NULL, NULL, NULL, NULL, 0, 'merylm', '2014-09-30')
 SET IDENTITY_INSERT [dbo].[TRoastBatch] OFF
 GO
+
+CREATE TABLE [dbo].[TStockPurchase](
+	[PurchaseID] [int] IDENTITY(1,1) NOT NULL,
+	[PurchaseDate] [date] NOT NULL,
+	[StockID] [int] NOT NULL,
+	[QtyPurchased] [udtStockQty] NULL,
+	[PricePerKg] [money] NULL,
+	[Notes] [varchar](255) NULL,
+ CONSTRAINT [PK_TStockPurchase] PRIMARY KEY CLUSTERED 
+(
+	[PurchaseID] ASC
+)
+)
+GO
+SET IDENTITY_INSERT [dbo].[TStockPurchase] ON
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (1, '2014-08-05', 23, CAST(50.000 AS Decimal(9, 3)), 75.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (2, '2014-08-10', 9, CAST(40.000 AS Decimal(9, 3)), 80.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (3, '2014-08-17', 13, CAST(25.000 AS Decimal(9, 3)), 99.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (4, '2014-09-01', 13, CAST(50.000 AS Decimal(9, 3)), 95.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (7, '2014-09-05', 13, CAST(25.000 AS Decimal(9, 3)), 90.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (8, '2014-08-05', 13, CAST(50.000 AS Decimal(9, 3)), 100.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (9, '2014-08-05', 1, CAST(50.000 AS Decimal(9, 3)), 200.0000, N'')
+SET IDENTITY_INSERT [dbo].[TStockPurchase] OFF

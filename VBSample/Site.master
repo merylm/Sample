@@ -1,0 +1,53 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeFile="Site.Master.vb" Inherits="Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title>Roastery Sample</title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                 <h1>
+                    Roastery Sample Site
+                </h1>
+            </div>
+             <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                        <asp:MenuItem Text="Stock" Value="Stock">
+                            <asp:MenuItem Text="Stock List" Value="Stock List" 
+                                NavigateUrl="~/Forms/StockList.aspx"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Forms/BlendSummary.aspx" Text="Blend Summary" 
+                                Value="Blend Summary"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Roasting" Value="Roasting">
+                            <asp:MenuItem NavigateUrl="~/Forms/RoastBatchList.aspx" Text="View Batches" 
+                                Value="View Batches"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Forms/RoastBatchDetail.aspx" Text="Add Batch" 
+                                Value="Add Batch"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Forms/RoastCalculator.aspx" 
+                                Text="Roast Calculator" Value="Roast Calculator"></asp:MenuItem>
+                        </asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    </form>
+</body>
+</html>

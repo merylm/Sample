@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode title="Site map">
+    <siteMapNode url="" title="Stock">
+      <siteMapNode url="~/Forms/StockList.aspx" title="Stock List" />
+      <siteMapNode url="~/Forms/BlendSummary.aspx" title="Blend Summary" />
+    </siteMapNode>
+    <siteMapNode url="" title="Roasting">
+      <siteMapNode url="~/Forms/RoastBatchList.aspx" title="View Batches" />
+      <siteMapNode url="~/Forms/RoastBatchDetail.aspx" title="Add Batch" />
+      <siteMapNode url="~/Forms/RoastCalculator.aspx" title="Roast Calculator" />
+   </siteMapNode>
+  </siteMapNode>
+</siteMap>

@@ -25,12 +25,12 @@ GO
 SET ANSI_PADDING OFF
 GO
 SET IDENTITY_INSERT [dbo].[TSystemVariable] ON
-INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (1, N'ItemTypeGreenBean', N'1                                                 ', NULL)
+INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (1, N'ItemTypeGreenBean', N'1', NULL)
 INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (2, N'ItemTypeRoast', N'2', NULL)
-INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (3, N'ItemTypeBlend', N'3                                                 ', NULL)
+INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (3, N'ItemTypeBlend', N'3', NULL)
 INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (4, N'LatestStockID', N'60', NULL)
 INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (5, N'LatestDespatchID', N'41', NULL)
-INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (6, N'FwdPlanningFactor', N'0.2                                               ', NULL)
+INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (6, N'FwdPlanningFactor', N'0.2', NULL)
 INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (7, N'RoastExpiryDays', N'7', NULL)
 INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (8, N'CurrentRoastReqID', N'0', NULL)
 INSERT [dbo].[TSystemVariable] ([SysVarID], [SysVarName], [Value], [SysVarText]) VALUES (9, N'DefaultLossPerc', N'20', NULL)
@@ -164,7 +164,7 @@ INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [Qty
 INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [QtyInStock], [QtyInStorage], [PricePerKg], [LeadTime], [ReplacedBy]) VALUES (9, NULL, NULL, NULL, CAST(0.000 AS Decimal(9, 3)), NULL, 80.0000, NULL, NULL)
 INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [QtyInStock], [QtyInStorage], [PricePerKg], [LeadTime], [ReplacedBy]) VALUES (11, NULL, NULL, NULL, CAST(0.000 AS Decimal(9, 3)), NULL, NULL, NULL, NULL)
 INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [QtyInStock], [QtyInStorage], [PricePerKg], [LeadTime], [ReplacedBy]) VALUES (13, NULL, NULL, NULL, CAST(78.000 AS Decimal(9, 3)), NULL, 96.1111, NULL, NULL)
-INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [QtyInStock], [QtyInStorage], [PricePerKg], [LeadTime], [ReplacedBy]) VALUES (15, NULL, NULL, NULL, CAST(211.000 AS Decimal(9, 3)), NULL, 350.0000, NULL, NULL)
+INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [QtyInStock], [QtyInStorage], [PricePerKg], [LeadTime], [ReplacedBy]) VALUES (15, NULL, NULL, NULL, CAST(150.000 AS Decimal(9, 3)), NULL, 350.0000, NULL, NULL)
 INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [QtyInStock], [QtyInStorage], [PricePerKg], [LeadTime], [ReplacedBy]) VALUES (17, NULL, NULL, NULL, CAST(58.000 AS Decimal(9, 3)), NULL, 200.0000, NULL, NULL)
 INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [QtyInStock], [QtyInStorage], [PricePerKg], [LeadTime], [ReplacedBy]) VALUES (19, NULL, NULL, NULL, CAST(30.000 AS Decimal(9, 3)), NULL, 200.0000, NULL, NULL)
 INSERT [dbo].[TStockGreen] ([StockID], [KgsPerBag], [MinQty], [ReorderQty], [QtyInStock], [QtyInStorage], [PricePerKg], [LeadTime], [ReplacedBy]) VALUES (21, NULL, NULL, NULL, CAST(1.000 AS Decimal(9, 3)), NULL, 0.0000, NULL, NULL)
@@ -361,9 +361,10 @@ GO
 SET IDENTITY_INSERT [dbo].[TStockPurchase] ON
 INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (1, '2014-08-05', 23, CAST(50.000 AS Decimal(9, 3)), 75.0000, N'')
 INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (2, '2014-08-10', 9, CAST(40.000 AS Decimal(9, 3)), 80.0000, N'')
-INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (3, '2014-08-17', 13, CAST(25.000 AS Decimal(9, 3)), 99.0000, N'')
-INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (4, '2014-09-01', 13, CAST(50.000 AS Decimal(9, 3)), 95.0000, N'')
-INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (7, '2014-09-05', 13, CAST(25.000 AS Decimal(9, 3)), 90.0000, N'')
-INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (8, '2014-08-05', 13, CAST(50.000 AS Decimal(9, 3)), 100.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (3, '2014-08-17', 15, CAST(25.000 AS Decimal(9, 3)), 99.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (4, '2014-09-01', 15, CAST(50.000 AS Decimal(9, 3)), 95.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (7, '2014-09-05', 15, CAST(25.000 AS Decimal(9, 3)), 90.0000, N'')
+INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (8, '2014-08-05', 15, CAST(50.000 AS Decimal(9, 3)), 100.0000, N'')
 INSERT [dbo].[TStockPurchase] ([PurchaseID], [PurchaseDate], [StockID], [QtyPurchased], [PricePerKg], [Notes]) VALUES (9, '2014-08-05', 1, CAST(50.000 AS Decimal(9, 3)), 200.0000, N'')
 SET IDENTITY_INSERT [dbo].[TStockPurchase] OFF
+GO

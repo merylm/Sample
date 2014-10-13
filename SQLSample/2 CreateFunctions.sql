@@ -7,7 +7,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 30/8/2012
 -- Description:	Return the value stored in system
 -- variable "ItemTypeRoast"
 -- =============================================
@@ -33,7 +32,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 10/6/2012
 -- Description:	Return the value stored in system
 -- variable "ItemTypeGreenBean"
 -- =============================================
@@ -59,7 +57,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 10/6/2012
 -- Description:	Return the value stored in system
 -- variable "ItemTypeBlend"
 -- =============================================
@@ -84,7 +81,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 2012/7/1
 -- Description:	Calculate the default batch number
 --		Format is XXX-YYMM000 where
 --		XXX = Machine
@@ -204,7 +200,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 7/2/2013
 -- Description:	Calculate the average loss %
 -- for a particular bean, for the last 6 roasts
 -- =============================================
@@ -242,7 +237,6 @@ END
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 2012/08/29
 -- Description:	Add 3 decimal values together,
 --		providing they are not all null.
 --		In practice only one of the 3 will be non-null
@@ -271,7 +265,6 @@ GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 15/07/2012
 -- Description:	Return the number as a string
 --		padded with leading zeroes
 --		(max 50 characters)
@@ -298,7 +291,6 @@ GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 1/9/2013
 -- Description:	Round upwards to half.
 --		If the number is negative, return 0
 --		Otherwise round the number upwards to the nearest 0.5
@@ -331,7 +323,6 @@ GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 18/4/2013
 -- Description:	Calculate the average price per kilogram
 --		for one green bean. Parameters CurrentDate and CurrentQty
 --		refer to a point in time, possibly today but not necessarily.
@@ -401,10 +392,10 @@ BEGIN
 		
 	RETURN @FIFOPricePerKg
 END
+GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 22/4/2013
 -- Description:	Calculate the blend price per kg =
 --		weighted average of all components' price per kg
 -- =============================================
@@ -440,10 +431,10 @@ BEGIN
 	RETURN @Price
 
 END
+GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 26/5/2013
 -- Description:	Calculate the balance of stock on hand
 -- on a particular date
 -- =============================================
@@ -467,3 +458,4 @@ BEGIN
 	RETURN @Balance
 
 END
+GO

@@ -7,7 +7,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 5/9/2012
 -- Description:	Calculate the quantity of green bean that
 --		must be roasted in order to meet the requirements
 --		captured into TRoastRequirement, and output the results
@@ -114,7 +113,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 5/9/2012
 -- Description:	Populate table TRoastRequirement with
 --		all stock items that are flasgged as finished product
 -- =============================================
@@ -180,7 +178,6 @@ GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 23/5/2013
 -- Description:	Stock Summary Report
 -- =============================================
 CREATE PROCEDURE [dbo].[spStockSummaryReport]
@@ -255,7 +252,6 @@ GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 2012/07/02
 -- Description:	After roast batch is inserted, updated or deleted
 --		1. Calculate the loss percentage
 --		2. Update the green bean qty in stock
@@ -315,7 +311,6 @@ GO
 
 -- =============================================
 -- Author:		Meryl
--- Create date: 8/6/2012
 -- Description:	When a stock purchase is deleted,
 -- modify green stock quantity on hand and price per kg
 
@@ -346,7 +341,6 @@ EXEC sp_settriggerorder @triggername=N'[dbo].[trgStockPurchaseDelete]', @order=N
 GO
 -- =============================================
 -- Author:		Meryl
--- Create date: 8/6/2012
 -- Description:	When a stock purchase is entered,
 --		update green stock quantity on hand and price per kg.
 -- Also update the blend price per kg for all blends
